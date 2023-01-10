@@ -9,20 +9,6 @@ export default function InterviewerListItem(props) {
     "interviewers__item--selected": props.selected,
    });
 
-  // let formatSpots = () => {
-  //   if (props.spots > 1) {
-  //     return `${props.spots} spots remaining`
-  //   }
-
-  //   if (props.spots === 1) {
-  //     return `${props.spots} spot remaining`
-  //   }
-
-  //   if (props.spots === 0) {
-  //     return `no spots remaining`
-  //   }
-  // }
-
   return (
     <li className={interviewerClass} onClick={() => props.setInterviewer(props.id)}>
       <img
