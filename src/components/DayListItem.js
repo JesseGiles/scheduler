@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 export default function DayListItem(props) {
 
-  let buttonClass = classNames("day-list__item", {
+  let dayClass = classNames("day-list__item", {
     "day-list__item--selected": props.selected,
     "day-list__item--full": !props.spots
    });
@@ -25,7 +25,7 @@ export default function DayListItem(props) {
    }
 
   return (
-    <li className={buttonClass} onClick={() => props.setDay(props.name)}>
+    <li className={dayClass} onClick={() => props.setDay(props.name)}>
         <h2 className='text--regular'>{props.name}</h2>
         <h3 className='text--light'>
           {formatSpots()}
