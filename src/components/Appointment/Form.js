@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 
-import classNames from "classnames";
 import InterviewerList from "../InterviewerList";
 import Button from "../Button";
-import { getOwnPropertySymbols } from 'core-js/core/object';
 
 export default function Form(props) {
 
