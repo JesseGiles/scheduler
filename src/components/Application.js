@@ -74,15 +74,12 @@ export default function Application(props) {
       [id]: appointment,
     };
 
-    return axios
-      .delete(`/api/appointments/${id}`)
-      .then((res) => {
-        setState((prev) => ({
-          ...prev,
-          appointments,
-        }));
-      })
-      .catch((err) => console.log(err));
+    return axios.delete(`/api/appointments/${id}`).then((res) => {
+      setState((prev) => ({
+        ...prev,
+        appointments,
+      }));
+    });
   };
 
   const listAppointments = Object.values(dailyAppointments).map(
