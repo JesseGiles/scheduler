@@ -99,16 +99,10 @@ export default function Appointment(props) {
         />
       )}
       {mode === ERROR_SAVE && (
-        <Error
-          message={"Something done got borked"}
-          onClose={() => transition(CREATE)}
-        />
+        <Error message={"Something done got borked"} onClose={back} />
       )}
       {mode === ERROR_DELETE && (
-        <Error
-          message={"I cant let you do that."}
-          onClose={() => transition(SHOW)}
-        />
+        <Error message={"I cant let you do that."} onClose={back} />
       )}
     </article>
   );
