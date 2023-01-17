@@ -26,10 +26,35 @@ export default function useApplicationData() {
     });
   }, []);
 
+  const updateSpots = function (state, id) {
+    let updatedDays = [];
+
+    for (const day of state.days) {
+      let updatedDayWithSpots = day;
+      let availableSpots = 0;
+
+      console.log("day: ", day);
+      for (const appointmentID of day.appointments) {
+        console.log("appt id: ", appointmentID);
+        let appointmentToCheck = state.appointments[appointmentID];
+        if (appointmentToCheck.interview === null) {
+          availableSpots = availableSpots + 1;
+        }
+      }
+      updatedDayWithSpots.spots = availableSpots;
+      updatedDays.push(updatedDayWithSpots);
+    }
+
+    const newStateWithSpots = {
+      ...state,
+      days: updatedDays,
+    };
+
+    return newStateWithSpots;
+  };
+
   //pass to each Appointment component, will use to modify state
   const bookInterview = function (id, interview) {
-    console.log("id: ", id, " interview: ", interview);
-
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -41,10 +66,21 @@ export default function useApplicationData() {
     };
 
     return axios.put(`/api/appointments/${id}`, { interview }).then((res) => {
-      setState((prev) => ({
-        ...prev,
-        appointments,
-      }));
+      // setState((prev) => ({
+      //   ...prev,
+      //   appointments,
+      // }));
+
+      setState((prev) => {
+        const newStateWithAppointments = {
+          ...prev,
+          appointments,
+        };
+
+        const newStateWithSpots = updateSpots(newStateWithAppointments, id);
+
+        return newStateWithSpots;
+      });
     });
   };
 
@@ -62,10 +98,21 @@ export default function useApplicationData() {
     };
 
     return axios.delete(`/api/appointments/${id}`).then((res) => {
-      setState((prev) => ({
-        ...prev,
-        appointments,
-      }));
+      // setState((prev) => ({
+      //   ...prev,
+      //   appointments,
+      // }));
+
+      setState((prev) => {
+        const newStateWithAppointments = {
+          ...prev,
+          appointments,
+        };
+
+        const newStateWithSpots = updateSpots(newStateWithAppointments, id);
+
+        return newStateWithSpots;
+      });
     });
   };
 
