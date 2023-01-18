@@ -87,4 +87,12 @@ export default {
       data: fixtures.appointments,
     });
   }),
+
+  delete: jest.fn((url) => {
+    return Promise.resolve({
+      status: 200,
+      statusText: "OK",
+      data: fixtures.appointments,
+    });
+  }),
 };
