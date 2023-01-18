@@ -26,7 +26,7 @@ export default function useApplicationData() {
     });
   }, []);
 
-  const updateSpots = function (state, appointments, id) {
+  const updateSpots = function (state, appointments) {
     const newDays = [...state.days];
 
     //find the day
@@ -35,8 +35,10 @@ export default function useApplicationData() {
 
     //count the null appointments
     let spots = 0;
+
     for (const id of dayObj.appointments) {
       const appointment = appointments[id];
+
       if (!appointment.interview) {
         spots++;
       }
@@ -67,14 +69,13 @@ export default function useApplicationData() {
 
     return axios.put(`/api/appointments/${id}`, { interview }).then((res) => {
       setState((prev) => {
-        const newStateWithAppointments = {
+        const newDays = updateSpots(state, appointments);
+
+        return {
           ...prev,
+          days: newDays,
           appointments,
         };
-
-        const newStateWithSpots = updateSpots(newStateWithAppointments, id);
-
-        return newStateWithSpots;
       });
     });
   };
@@ -94,14 +95,13 @@ export default function useApplicationData() {
 
     return axios.delete(`/api/appointments/${id}`).then((res) => {
       setState((prev) => {
-        const newStateWithAppointments = {
+        const newDays = updateSpots(state, appointments);
+
+        return {
           ...prev,
+          days: newDays,
           appointments,
         };
-
-        const newStateWithSpots = updateSpots(newStateWithAppointments, id);
-
-        return newStateWithSpots;
       });
     });
   };
