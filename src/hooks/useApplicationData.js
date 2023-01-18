@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData() {
+  //our main state element for this app, will hold the appointments/interviews for each day
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -9,8 +10,10 @@ export default function useApplicationData() {
     interviewers: {},
   });
 
+  //get appointment/interview data when new day is selected
   const setDay = (day) => setState({ ...state, day });
 
+  //useEffect handles side effects that may occur when doing api calls that could be successful or fail, using promises. Sets state once data is retrieved successfully
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -26,14 +29,15 @@ export default function useApplicationData() {
     });
   }, []);
 
+  //function to update the interview spots available for each day, without mutating state or changing after an appointment edit
   const updateSpots = function (state, appointments) {
     const newDays = [...state.days];
 
-    //find the day
+    //find the particular day
     const index = newDays.findIndex((day) => day.name === state.day);
     const dayObj = newDays[index];
 
-    //count the null appointments
+    //count the null appointments in a day as these represent the avail spots
     let spots = 0;
 
     for (const id of dayObj.appointments) {
@@ -44,6 +48,7 @@ export default function useApplicationData() {
       }
     }
 
+    //spread a previously copied dayObj and add the new spots total, add to copied days array at the original index
     const day = { ...dayObj, spots };
     newDays[index] = day;
 
@@ -80,6 +85,7 @@ export default function useApplicationData() {
     });
   };
 
+  //if an interview is cancelled, set its value to null, delete from api and update state to reflect the changes
   const cancelInterview = function (id) {
     const interview = null;
 

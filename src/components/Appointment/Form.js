@@ -6,14 +6,14 @@ import Button from "../Button";
 export default function Form(props) {
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  //console.log("student: ", student);
 
+  //if new appointment form is cancelled, clear the name input field and reset any selected interviewer
   const reset = () => {
-    //console.log("reset");
     setStudent("");
     setInterviewer(null);
   };
 
+  //if new appointment form is cancelled, call reset() to clear form, call onCancel() to go back a mode, clear any error messages
   const cancel = () => {
     reset();
     props.onCancel();

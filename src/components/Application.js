@@ -10,8 +10,6 @@ import {
 } from "../helpers/selectors.js";
 import useApplicationData from "../hooks/useApplicationData";
 
-/////////
-
 export default function Application(props) {
   const { state, setDay, bookInterview, cancelInterview } =
     useApplicationData();
@@ -54,7 +52,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {dailyAppointments}
-        <Appointment //manually created appt to mark cutoff time daily
+        <Appointment //manually created appt to mark cutoff time daily, hidden except for time
           key="last"
           time="5pm"
         />

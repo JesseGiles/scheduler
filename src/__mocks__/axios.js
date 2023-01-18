@@ -53,6 +53,7 @@ const fixtures = {
   },
 };
 
+//for testing mock api calls with the above data returned instead
 export default {
   get: jest.fn((url) => {
     if (url === "/api/days") {

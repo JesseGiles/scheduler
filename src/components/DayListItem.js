@@ -9,6 +9,7 @@ export default function DayListItem(props) {
     "day-list__item--full": !props.spots,
   });
 
+  //this just formats how the text for spots remaining is displayed based on #
   let formatSpots = () => {
     if (props.spots > 1) {
       return `${props.spots} spots remaining`;

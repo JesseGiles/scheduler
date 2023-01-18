@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import "components/InterviewerList.scss";
-import classNames from "classnames";
 import InterviewerListItem from "./InterviewerListItem";
 
 //receives interviewers array as prop, maps over this to return individual interviewer components
