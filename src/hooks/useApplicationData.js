@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default function useApplicationData() {
   //our main state element for this app, will hold the appointments/interviews for each day
-  const [state, setState] = useState({
+  const [staten, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
