@@ -20,7 +20,15 @@ Thorough unit, integration and E2E testing was created with a combination of **J
 
 ## Setup
 
-Install dependencies with `npm install`.
+-Install dependencies with `npm install`.
+
+-Fork and clone the [`scheduler-api`](https://github.com/lighthouse-labs/scheduler-api) into a new directory. Follow the README.md instructions to install dependencies, create the database, seed and run the server.
+
+-Back in the scheduler director, run `npm start` to run the webpack development server. At this point, the client should be running on port 8000, and the API server on port 8001.
+
+-Visit `http://localhost:8000` in the browser.
+
+-If CORs errors are encountered, add `"proxy": "http://localhost:8001` to the package.json file in the main scheduler directory and restart the webpack server with `npm start`.
 
 ## Running Webpack Development Server
 
